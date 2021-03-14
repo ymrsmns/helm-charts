@@ -4,7 +4,7 @@
 
 [Fork chart](https://github.com/jetstack/version-checker/tree/master/deploy/charts/version-checker) jetstack
 
-Current chart version is `0.0.1`
+Current chart version is `0.0.2`
 
 ## Chart Values
 
@@ -28,11 +28,11 @@ Current chart version is `0.0.1`
 | image.repository | string | `"quay.io/jetstack/version-checker"` | Docker image repository. |
 | image.tag | string | `"v0.2.1"` | Docker image tag. |
 | imagePullSecrets | list | `[]` | Defines secrets to use for pulling docker images. |
-| livenessProbe | object | `{"httpGet":{"path":"/","port":"http"}}` | Customize the livenessProbe. |
+| livenessProbe | object | `{"httpGet":{"path":"/metrics","port":"8080"}}` | Customize the livenessProbe. |
 | nodeSelector | object | `{}` | Kubernetes node selectors for Deployment resources. |
 | prometheus.enabled | bool | `false`  | Use Prometheus Operator |
 | quay.token | string | `""` | Quay Container Registry |
-| readinessProbe | object | `{"httpGet":{"path":"/","port":"http"}}` | Customize the readiness probe. |
+| readinessProbe | object | `{}` | Customize the readiness probe. |
 | replicaCount | int | `1` | Replica count for deployments. |
 | resources | object | `{}` | Kubernetes resources for Deployment resources. |
 | secret | string | `nil` | If defined will pull all secrets from this resource using envFrom. |

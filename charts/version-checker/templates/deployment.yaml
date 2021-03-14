@@ -40,6 +40,11 @@ spec:
           - "--test-all-containers={{.Values.versionChecker.testAllContainers}}"
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
+
+        {{ with .Values.livenessProbe }}
+        livenessProbe:
+          {{- toYaml . | nindent 12 }}
+        {{- end -}}          
         env:
 
         # ACR

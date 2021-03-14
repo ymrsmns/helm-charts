@@ -7,4 +7,4 @@ maintainers:
   - name: ymrsmns
 sources:
   - https://github.com/ymrsmns/helm-charts-0  
-version: 0.0.1
+version: 0.0.2

@@ -68,6 +68,11 @@ resources: {}
   #   memory: 128Mi
   #
 
+livenessProbe:
+  httpGet:
+    path: /metrics
+    port: 8080
+
 # Prometheus Operator
 prometheus:
   enabled: false
