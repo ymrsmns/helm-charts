@@ -1,14 +1,11 @@
-{{- if .Values.service.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "version-checker.name" . }}
-  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ include "version-checker.name" . }}
 {{ include "version-checker.labels" . | indent 4 }}
 spec:
-  type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 8080
@@ -16,4 +13,3 @@ spec:
       name: web
   selector:
     app: {{ include "version-checker.name" . }}
-{{- end }}

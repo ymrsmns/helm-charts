@@ -1,0 +1,41 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+{{ template "chart.versionBadge" .  }}{{ template "chart.typeBadge" .  }}{{ template "chart.appVersionBadge" .  }}
+
+[Version-checker](https://github.com/jetstack/version-checker)  is a Kubernetes utility for observing the current versions of images running in the cluster, as well as the latest available upstream. These checks get exposed as Prometheus metrics to be viewed on a dashboard, or soft alert cluster operators.
+
+[Fork chart](https://github.com/jetstack/version-checker/tree/master/deploy/charts/version-checker) jetstack
+
+<img src="https://github.com/ymrsmns/helm-charts/tree/main/charts/version-checker/dashboard.png" width=500 height=300>
+
+## Get Repo Info
+
+```console
+helm repo add ymrs https://ymrsmns.github.io/helm-charts/
+helm repo update
+```
+
+_See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm install my-release ymrs/version-checker
+```
+
+## Uninstalling the Chart
+
+To uninstall/delete the my-release deployment:
+
+```console
+helm delete my-release
+```
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
+
+{{ template "helm-docs.versionFooter" . }}

@@ -7,7 +7,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $chartname }}
-  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "version-checker.labels" . | indent 4 }}
 spec:
@@ -170,15 +169,4 @@ spec:
           secret:
             secretName: {{ include "version-checker.name" . }}
         {{ end }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+
