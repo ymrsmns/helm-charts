@@ -8,9 +8,9 @@ entries:
     digest: 94b2cf73aaff00945042e4a442fe65474110df81ba06bf7ce0e4726f1f097fe5
     home: https://github.com/joshvanl/verison-checker
     maintainers:
-    - name: joshvanl
+    - name: ymrsmns
     name: version-checker
     urls:
-    - https://github.com/ymrsmns/helm-charts/version-checker/version-checker-0.2.2.tgz
+    - version-checker/version-checker-0.2.2.tgz
     version: 0.2.2
 generated: "2021-04-06T00:28:47.827558+03:00"
