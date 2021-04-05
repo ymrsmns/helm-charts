@@ -8,7 +8,7 @@ A Helm chart for version-checker
 
 [Fork chart](https://github.com/jetstack/version-checker/tree/master/deploy/charts/version-checker) jetstack
 
-<img src="https://github.com/ymrsmns/helm-charts/blob/main/charts/version-checker/dashboard.png" width=500 height=300>
+<img src="https://github.com/ymrsmns/helm-charts/blob/main/charts/version-checker/dashboard.png" width=700 height=300>
 
 ## Get Repo Info
 
