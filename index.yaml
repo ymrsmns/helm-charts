@@ -3,7 +3,7 @@ entries:
   version-checker:
   - apiVersion: v1
     appVersion: v0.2.1
-    created: "2021-04-06T00:28:47.828337+03:00"
+    created: "2021-04-06T01:26:30.616918+03:00"
     description: A Helm chart for version-checker
     digest: 94b2cf73aaff00945042e4a442fe65474110df81ba06bf7ce0e4726f1f097fe5
     home: https://github.com/joshvanl/verison-checker
@@ -11,6 +11,21 @@ entries:
     - name: ymrsmns
     name: version-checker
     urls:
-    - version-checker/version-checker-0.2.2.tgz
+    - https://github.com/ymrsmns/helm-charts/version-checker/version-checker-0.2.2.tgz
     version: 0.2.2
-generated: "2021-04-06T00:28:47.827558+03:00"
+  - apiVersion: v1
+    appVersion: v0.2.1
+    created: "2021-04-05T22:25:45.772256329Z"
+    description: A Helm chart for version-checker
+    digest: f06f04054c7a17768cd212b8802ba26b0798b7c031bd4ccb81d8ac03735c3a17
+    home: https://github.com/joshvanl/verison-checker
+    maintainers:
+    - email: ymrs@yandex.ru
+      name: ymrsmns
+    name: version-checker
+    sources:
+    - https://github.com/ymrsmns/helm-charts/tree/main/charts/version-checker
+    urls:
+    - version-checker/version-checker-0.2.3.tgz
+    version: 0.2.3
+generated: "2021-04-06T01:26:30.615855+03:00"
