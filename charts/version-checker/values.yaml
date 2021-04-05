@@ -10,12 +10,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  # service.enabled -- Enable service resource.
-  enabled: true
-  # service.port -- Kubernetes service port.
   port: 8080
-  # service.type -- Kubernetes service type.
-  type: ClusterIP
 
 versionChecker:
   imageCacheTimeout: 30m

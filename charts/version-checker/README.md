@@ -1,47 +1,72 @@
-# Version-checker
+# version-checker
+
+A Helm chart for version-checker
+
+![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![AppVersion: v0.2.1](https://img.shields.io/badge/AppVersion-v0.2.1-informational?style=flat-square)
 
 [Version-checker](https://github.com/jetstack/version-checker)  is a Kubernetes utility for observing the current versions of images running in the cluster, as well as the latest available upstream. These checks get exposed as Prometheus metrics to be viewed on a dashboard, or soft alert cluster operators.
 
 [Fork chart](https://github.com/jetstack/version-checker/tree/master/deploy/charts/version-checker) jetstack
 
-Current chart version is `0.0.1`
+<img src="https://github.com/ymrsmns/helm-charts/tree/main/charts/version-checker/dashboard.png" width=500 height=300>
 
-## Chart Values
+## Get Repo Info
+
+```console
+helm repo add ymrs https://ymrsmns.github.io/helm-charts/
+helm repo update
+```
+
+_See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+helm install my-release ymrs/version-checker
+```
+
+## Uninstalling the Chart
+
+To uninstall/delete the my-release deployment:
+
+```console
+helm delete my-release
+```
+
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| acr.username | string | `""` | Azure Container Registry |
-| acr.password | string | `""` | Azure Container Registry |
-| acr.refreshToken | string | `""` | Azure Container Registry |
-| affinity | object | `{}` | Kubernetes affinity resource. |
-| app.name | string | `"version-checker"` | Application name: Can be consistent between tracks. (required) |
-| app.version | string | `"v0.2.1"` | Application version: Unique tag for this release. (required) |
-| docker.username | string | `""` | Docker Container Registry |
-| docker.password | string | `""` | Docker Container Registry |
-| docker.token | string | `""` | Docker Container Registry |
-| ecr.accessKeyID | string | `""` | Amazon Elastic Container Registry |
-| ecr.secretAccessKey | string | `""` | Amazon Elastic Container Registry |
-| ecr.sessionToken | string | `""` | Amazon Elastic Container Registry |
-| env | object | `{}` | Environment variables for the application. |
-| gcr.token | string | `""` | Google Container Registry |
+| acr.password | string | `nil` |  |
+| acr.refreshToken | string | `nil` |  |
+| acr.username | string | `nil` |  |
+| docker.password | string | `nil` |  |
+| docker.token | string | `nil` |  |
+| docker.username | string | `nil` |  |
+| ecr.accessKeyID | string | `nil` |  |
+| ecr.secretAccessKey | string | `nil` |  |
+| ecr.sessionToken | string | `nil` |  |
+| env | object | `{}` |  |
+| gcr.token | string | `nil` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"quay.io/jetstack/version-checker"` | Docker image repository. |
-| image.tag | string | `"v0.2.1"` | Docker image tag. |
-| imagePullSecrets | list | `[]` | Defines secrets to use for pulling docker images. |
-| livenessProbe | object | `{"httpGet":{"path":"/","port":"http"}}` | Customize the livenessProbe. |
-| nodeSelector | object | `{}` | Kubernetes node selectors for Deployment resources. |
-| prometheus.enabled | bool | `false`  | Use Prometheus Operator |
-| quay.token | string | `""` | Quay Container Registry |
-| readinessProbe | object | `{"httpGet":{"path":"/","port":"http"}}` | Customize the readiness probe. |
-| replicaCount | int | `1` | Replica count for deployments. |
-| resources | object | `{}` | Kubernetes resources for Deployment resources. |
-| secret | string | `nil` | If defined will pull all secrets from this resource using envFrom. |
-| selfhosted.host | string | `""` | Selfhosted |
-| selfhosted.username | string | `""` | Selfhosted |
-| selfhosted.password | string | `""` | Selfhosted |
-| selfhosted.token | string | `""` | Selfhosted |
-| service.enabled | bool | `true` | Enable service resource. |
-| service.port | int | `8080` | Kubernetes service port. |
-| service.type | string | `"ClusterIP"` | Kubernetes service type. |
-| serviceMonitor.enabled | bool | `false`  | Create Service Monitor |
-| tolerations | list | `[]` | Kubernetes tolerations for Deployment resources. |
+| image.repository | string | `"quay.io/jetstack/version-checker"` |  |
+| image.tag | string | `"v0.2.1"` |  |
+| prometheus.enabled | bool | `false` |  |
+| prometheus.replicas | int | `1` |  |
+| prometheus.serviceAccountName | string | `"prometheus"` |  |
+| quay.token | string | `nil` |  |
+| replicaCount | int | `1` |  |
+| resources | object | `{}` |  |
+| selfhosted | object | `{}` |  |
+| service.port | int | `8080` |  |
+| serviceMonitor.additionalLabels | object | `{}` |  |
+| serviceMonitor.enabled | bool | `false` |  |
+| versionChecker.imageCacheTimeout | string | `"30m"` |  |
+| versionChecker.logLevel | string | `"info"` |  |
+| versionChecker.metricsServingAddress | string | `"0.0.0.0:8080"` |  |
+| versionChecker.testAllContainers | bool | `true` |  |
+
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.5.0](https://github.com/norwoodj/helm-docs/releases/v1.5.0)

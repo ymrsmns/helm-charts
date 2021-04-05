@@ -1,10 +1,11 @@
 apiVersion: v1
 appVersion: "v0.2.1"
+version: 0.2.3
 description: A Helm chart for version-checker
-home: https://github.com/jetstack/version-checker
+home: https://github.com/joshvanl/verison-checker
 name: version-checker
-maintainers:
-  - name: ymrsmns
 sources:
-  - https://github.com/ymrsmns/helm-charts-0  
-version: 0.0.1
+  - https://github.com/ymrsmns/helm-charts/tree/main/charts/version-checker
+maintainers:
+- name: ymrsmns
+  email: ymrs@yandex.ru
