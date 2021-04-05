@@ -12,7 +12,7 @@ entries:
     - name: ymrsmns
     name: version-checker
     urls:
-    - https://github.com/ymrsmns/helm-charts/releases/download/version-checker-0.2.2/version-checker-0.2.2.tgz
+    - version-checker/version-checker-0.2.2.tgz
     version: 0.2.2
 generated: "2021-04-05T10:32:55Z"
 serverInfo: {}
