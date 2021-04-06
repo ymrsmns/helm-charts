@@ -101,9 +101,11 @@ spec:
 {{- end }}
       volumes:
         - name: app-persist
-        {{- if .Values.persistence.enabled }}
+        {{- if and .Values.persistence.enabled (not .Values.extraVolumeMounts.enabled) }}
           persistentVolumeClaim:
             claimName: {{ template "satisfy.fullname" . }}
+        {{- else if .Values.extraVolumeMounts.enabled  }}  
+{{ toYaml .Values.extraVolumeMounts.volume | indent 10 }}
         {{- else }}
           emptyDir: {}
         {{- end -}}
