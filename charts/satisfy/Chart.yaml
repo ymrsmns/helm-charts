@@ -1,0 +1,15 @@
+apiVersion: v1
+appVersion: 3.0.4
+description: Composer repo hosting with Satisfy
+home: https://github.com/anapsix/docker-satisfy
+icon: https://getcomposer.org/img/logo-composer-transparent.png
+maintainers:
+- email: anapsix@random.io
+  name: anapsix
+name: satisfy
+sources:
+- https://github.com/anapsix/docker-satisfy
+- https://github.com/ludofleury/satisfy
+- https://github.com/composer/satis
+- https://unit.nginx.org/
+version: 1.0.0
