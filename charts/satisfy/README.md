@@ -5,14 +5,13 @@
 ```console
 helm repo add ymrs https://ymrsmns.github.io/helm-charts/
 helm repo update
-
-
+```
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:
 
 ```console
-$ helm install --name my-release ymrs/satisfy
+helm install --name my-release ymrs/satisfy
 ```
 
 ## Uninstalling the Chart
@@ -20,7 +19,7 @@ $ helm install --name my-release ymrs/satisfy
 To uninstall/delete the `my-release` deployment:
 
 ```console
-$ helm delete my-release
+helm delete my-release
 ```
 
 The command removes nearly all the Kubernetes components associated with the
