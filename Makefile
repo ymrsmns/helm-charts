@@ -1,7 +1,7 @@
 export PACK=satisfy
 export VERSION=1.0.2
 export PACKS=$PACK-$VERSION
-git checkout main
+#git checkout main
 cd charts
 helm package $PACK
 mv ${PACKS}.tgz /tmp
