@@ -6,4 +6,5 @@
 
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| [Version-checker](charts/version-checker) | Checks images running in the Kubernetes cluster |                                                                                      
+| [Version-checker](charts/version-checker) | Checks images running in the Kubernetes cluster |
+| [Version-checker](charts/satisfy) | Composer repo hosting with Satisfy |                                                                                      
