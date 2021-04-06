@@ -4,11 +4,11 @@ export PACKS=$PACK-$VERSION
 #git checkout main
 cd charts
 helm package $PACK
-mv ${PACKS}.tgz /tmp
-git commit -am "Update $$PACKS"
+mv $PACK/${PACKS}.tgz /tmp
+git commit -am "Update $PACKS"
 git checkout gh-pages
 cd ../
-mv  /tmp/${PACKS}.tgz $PACK/$PACKS
+cp  /tmp/${PACKS}.tgz $PACK/
 helm repo index  --url https://ymrsmns.github.io/helm-charts/ .
 git add .
 git status
