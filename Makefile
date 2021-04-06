@@ -7,6 +7,6 @@ helm package $PACK
 mv ${PACKS}.tgz /tmp
 git checkout gh-pages
 mv  /tmp/${PACKS} $PACK/$PACKS
-helm repo index  --url https://ymrsmns.github.io/helm-charts/ .
+helm repo index  --url https://github.com/ymrsmns/helm-charts/releases/download/ .
 git add .
 echo "Please run commit"
