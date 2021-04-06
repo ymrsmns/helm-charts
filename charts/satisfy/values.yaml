@@ -64,8 +64,14 @@ persistence:
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
   # existingClaim:
+  external: {}
 
-
+extraVolumeMounts:
+  enabled: false
+  # volume:
+  #   nfs:
+  #     path: /mnt/data
+  #     server: 10.200.2.8
 ## Application settings
 ## For more details see Satis documentaion
 ## https://getcomposer.org/doc/articles/handling-private-packages-with-satis.md#setup

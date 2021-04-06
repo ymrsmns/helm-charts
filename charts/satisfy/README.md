@@ -10,9 +10,15 @@ helm repo update
 
 To install the chart with the release name `my-release`:
 
+### Helm 2
 ```console
 helm install --name my-release ymrs/satisfy
 ```
+### Helm 3
+```console
+helm install my-release ymrs/satisfy
+```
+
 
 ## Uninstalling the Chart
 
