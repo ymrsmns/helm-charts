@@ -2,17 +2,23 @@ apiVersion: v1
 entries:
   nginx-vts-exporter:
   - annotations:
+      artifacthub.io/changes: |
+        - Addons serviceMonitor, review description
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |
         - name: Documentation
           url: https://github.com/vozlt/nginx-module-vts/blob/master/README.md
     apiVersion: v2
     appVersion: 0.10.7
-    created: "2021-04-27T14:12:31.812117+03:00"
-    description: Simple server that scrapes Nginx vts stats and exports them via HTTP
+    created: "2021-04-27T14:58:51.634987+03:00"
+    description: A Helm chart for scrapes Nginx vts stats and exports them via HTTP
       for Prometheus consumption
-    digest: 1fefe0a3c5d14d7a8a0b0b87f8a1ae30aa9a21c44afd8973ae2710d7f1511a91
+    digest: 408ea24007a925a1b4bd5f004fb64396f513faf4e3c911059cee8d4c686215db
     home: https://github.com/vozlt/nginx-module-vts
+    keywords:
+    - prometheus
+    - monitoring
+    - nginx
     maintainers:
     - email: ymrs@yandex.ru
       name: ymrsmns
@@ -22,8 +28,8 @@ entries:
     - https://github.com/hnlq715/nginx-vts-exporter
     type: application
     urls:
-    - https://github.com/ymrsmns/helm-charts/releases/download/nginx-vts-exporter-0.1.0.tgz
-    version: 0.1.0
+    - https://github.com/ymrsmns/helm-charts/releases/download/nginx-vts-exporter-0.1.1/nginx-vts-exporter-0.1.1.tgz
+    version: 0.1.1
   satisfy:
   - apiVersion: v1
     appVersion: 3.0.4
