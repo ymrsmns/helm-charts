@@ -3,7 +3,7 @@ appVersion: 0.10.7
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
-    - Addons serviceMonitor, review description
+    - Fix selector.matchLabels
   artifacthub.io/links: |
     - name: Documentation
       url: https://github.com/vozlt/nginx-module-vts/blob/master/README.md
@@ -21,6 +21,6 @@ sources:
   - https://github.com/ymrsmns/helm-charts/tree/main/charts/nginx-vts-exporter
   - https://github.com/hnlq715/nginx-vts-exporter
 type: application
-version: 0.1.1
+version: 0.1.2
 
 
