@@ -9,4 +9,5 @@
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
 | [Version-checker](charts/version-checker) | Checks images running in the Kubernetes cluster |
-| [Version-checker](charts/satisfy) | Composer repo hosting with Satisfy |                                                                                      
+| [Satisfy](charts/satisfy) | Composer repo hosting with Satisfy |
+| [Nginx-vts-exporter](charts/nginx-vts-exporter) | Scrapes Nginx vts stats and exports them via HTTP for Prometheus consumption|
