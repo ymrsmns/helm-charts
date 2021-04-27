@@ -1,5 +1,29 @@
 apiVersion: v1
 entries:
+  nginx-vts-exporter:
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/vozlt/nginx-module-vts/blob/master/README.md
+    apiVersion: v2
+    appVersion: 0.10.7
+    created: "2021-04-27T14:12:31.812117+03:00"
+    description: Simple server that scrapes Nginx vts stats and exports them via HTTP
+      for Prometheus consumption
+    digest: 1fefe0a3c5d14d7a8a0b0b87f8a1ae30aa9a21c44afd8973ae2710d7f1511a91
+    home: https://github.com/vozlt/nginx-module-vts
+    maintainers:
+    - email: ymrs@yandex.ru
+      name: ymrsmns
+    name: nginx-vts-exporter
+    sources:
+    - https://github.com/ymrsmns/helm-charts/tree/main/charts/nginx-vts-exporter
+    - https://github.com/hnlq715/nginx-vts-exporter
+    type: application
+    urls:
+    - https://github.com/ymrsmns/helm-charts/releases/download/nginx-vts-exporter-0.1.0.tgz
+    version: 0.1.0
   satisfy:
   - apiVersion: v1
     appVersion: 3.0.4
@@ -18,7 +42,7 @@ entries:
     - https://github.com/composer/satis
     - https://unit.nginx.org/
     urls:
-    - https://github.com/ymrsmns/helm-charts/releases/download/satisfy/satisfy-1.0.2.tgz
+    - https://github.com/ymrsmns/helm-charts/releases/download/satisfy-1.0.2/satisfy-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
     appVersion: 3.0.4
