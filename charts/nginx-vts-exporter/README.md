@@ -1,8 +1,8 @@
 # nginx-vts-exporter
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.7](https://img.shields.io/badge/AppVersion-0.10.7-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.10.7](https://img.shields.io/badge/AppVersion-0.10.7-informational?style=flat-square)
 
-Simple server that scrapes Nginx vts stats and exports them via HTTP for Prometheus consumption
+A Helm chart for scrapes Nginx vts stats and exports them via HTTP for Prometheus consumption
 
 **Homepage:** <https://github.com/vozlt/nginx-module-vts>
 
@@ -34,11 +34,13 @@ Simple server that scrapes Nginx vts stats and exports them via HTTP for Prometh
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
-| service.port | int | `80` |  |
+| service.port | int | `8080` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
+| serviceMonitor.additionalLabels | object | `{}` |  |
+| serviceMonitor.enabled | bool | `false` |  |
 | tolerations | list | `[]` |  |
 | vts.address | string | `":9913"` |  |
 | vts.endpoint | string | `"/metrics"` |  |

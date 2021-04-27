@@ -1,0 +1,18 @@
+{{- if or  .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "vts-exporter.name" . }}
+  labels:
+    app: {{ include "vts-exporter.name" . }}
+    {{- if .Values.serviceMonitor.additionalLabels }}
+{{- .Values.serviceMonitor.additionalLabels | toYaml | nindent 4 }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "vts-exporter.name" . }}
+  endpoints:
+  - port: http
+    path: /metrics
+{{- end }}
