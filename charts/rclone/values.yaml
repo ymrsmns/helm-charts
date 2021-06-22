@@ -1,6 +1,7 @@
 # Default values for rclone.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+
+# kind CronJob or Deployment
+kind: CronJob
 
 replicaCount: 1
 
@@ -21,9 +22,15 @@ init:
     sync.sh: |-
       #!/bin/sh
       date
+      ### Init
       cat /root/rclone/rclone.conf > /etc/rclone/rclone.conf
       ls -la /etc/rclone/
-      exit
+      pwd
+      ### Create arch
+      DATA=$(date +"%d-%m-%y_%H-%M-%S")
+      echo "test">  /source/test.txt
+      tar -czvf /out/arhive-$DATA.tar.gz /source       
+
   # mount path    
   persistence: 
   - name: source
@@ -42,16 +49,29 @@ init:
     initPath: /etc/rclone
     containerPath: /etc/rclone
 
-cfgRclone:
-  rclone.conf: |-
-    # your rclone config is managed here.   
-    [test-gdrive]
-    type = drive
-    client_id = 123456.apps.googleusercontent.com
-    client_secret = 123456
-    scope = drive
-    token = {}
-    team_drive = 123456
+rclone:
+  runScript:
+    run.sh: |-
+      #!/bin/sh
+      date
+      cd /out
+      rclone ls test-gdrive: --config /etc/rclone/rclone.conf
+      rclone copy *.tar.gz test-gdrive: --config /etc/rclone/rclone.conf 
+      
+  cfgRclone:
+    rclone.conf: |-
+      # your rclone config is managed here.   
+      [test-gdrive]
+      type = drive
+      client_id = 123456.apps.googleusercontent.com
+      client_secret = 123456
+      scope = drive
+      token = {}
+      team_drive = 123456
+
+cronjob: 
+  schedule: "*/1 * * * *"
+  activeDeadlineSeconds: 300
 
 imagePullSecrets: []
 nameOverride: ""
