@@ -16,6 +16,7 @@ init:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "1.33.1"
+  # Create arhive and copy backup files  
   runScript:
     sync.sh: |-
       #!/bin/sh
@@ -23,6 +24,7 @@ init:
       cat /root/rclone/rclone.conf > /etc/rclone/rclone.conf
       ls -la /etc/rclone/
       exit
+  # mount path    
   persistence: 
   - name: source
     emptyDir: true
@@ -41,8 +43,14 @@ init:
 
 cfgRclone:
   rclone.cfg: |-
-    your rclone config is managed here.   
-  
+    # your rclone config is managed here.   
+    [test-gdrive]
+    type = drive
+    client_id = 123456.apps.googleusercontent.com
+    client_secret = 123456
+    scope = drive
+    token = {"access_token":"123456","token_type":"Bearer","refresh_token":"123456","expiry":"2021-06-21T13:38:00.577446+03:00"}
+    team_drive = 123456
 
 imagePullSecrets: []
 nameOverride: ""
