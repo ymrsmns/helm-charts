@@ -43,7 +43,7 @@ init:
     containerPath: /etc/rclone
 
 cfgRclone:
-  rclone.cfg: |-
+  rclone.conf: |-
     # your rclone config is managed here.   
     [test-gdrive]
     type = drive
