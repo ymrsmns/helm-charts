@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rclone.fullname" . }}
+  labels:
+    {{- include "rclone.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "rclone.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rclone.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "rclone.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+      - command:
+        - sh
+        - /opt/sync.sh
+        image: "{{ .Values.init.image.repository }}:{{ .Values.init.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.init.image.pullPolicy }}
+        name: create-archive
+        resources: 
+          {{- toYaml .Values.resources | nindent 12 }}
+        volumeMounts:
+        - name: init
+          mountPath: /opt
+        - name: rclone-cm
+          mountPath: /root/rclone/          
+        {{- range $key, $volume := .Values.init.persistence }}
+        {{- if $volume.initPath }}    
+        - name: {{ include "rclone.fullname" $ }}-{{ $key }}
+          mountPath: {{ $volume.initPath }}
+        {{- end }}
+        {{- end }}
+  
+      containers:
+        - name: {{ .Chart.Name }}
+          #command: ["/bin/sh","-c","cp /etc/rclone/rclone.conf /tmp/ && rclone ls test-gdrive: --config /tmp/rclone.conf"]
+          args: ["ls", "test-gdrive:","--config","/etc/rclone/rclone.conf"]
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+
+            
+          {{- range $key, $volume := .Values.init.persistence }}
+          {{- if $volume.containerPath }}    
+          - name: {{ include "rclone.fullname" $ }}-{{ $key }}
+            mountPath: {{ $volume.containerPath }}
+          {{- end }}
+          {{- end }}            
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: init
+          configMap:
+            name: {{ include "rclone.fullname" . }}-init
+        - name: rclone-cm
+          configMap:
+            name: {{ include "rclone.fullname" . }}-rclone            
+      {{- range $key, $volume := .Values.init.persistence }}
+        - name: {{ include "rclone.fullname" $ }}-{{ $key }}   
+          {{- if $volume.hostPath }}
+          hostPath:
+            path: {{ $volume.hostPath }}
+          {{- else if $volume.emptyDir }}
+          emptyDir: {}
+          {{- else if $volume.nfs }}
+          nfs: 
+            server: {{ $volume.server }} 
+            path: {{ $volume.nfsPath }}
+          {{- else if $volume.existingClaimNotCreate }}  
+          persistentVolumeClaim:
+            claimName: {{ if $volume.existingClaim }}{{ $volume.existingClaim }}{{- else }}{{ include "abc.fullname" $ }}-{{ $key }}{{- end }}
+          {{- else }}
+          persistentVolumeClaim:
+            claimName: {{ if $volume.existingClaim }}{{ .Release.Name }}-{{ $volume.existingClaim }}{{- else }}{{ include "abc.fullname" $ }}-{{ $key }}{{- end }}
+          {{- end }}
+      {{- end }}
+
+         
