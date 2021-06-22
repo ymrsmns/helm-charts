@@ -35,6 +35,7 @@ init:
     init: true
     initPath: /out
     containerPath: /out
+  # Hack: rclone write in temp configuration  
   - name: rc
     emptyDir: true
     init: true
@@ -49,7 +50,7 @@ cfgRclone:
     client_id = 123456.apps.googleusercontent.com
     client_secret = 123456
     scope = drive
-    token = {"access_token":"123456","token_type":"Bearer","refresh_token":"123456","expiry":"2021-06-21T13:38:00.577446+03:00"}
+    token = {}
     team_drive = 123456
 
 imagePullSecrets: []

@@ -2,7 +2,7 @@
 
 A Helm chart for backup persistent in gdrive
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.52.3](https://img.shields.io/badge/AppVersion-1.52.3-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.52.3](https://img.shields.io/badge/AppVersion-1.52.3-informational?style=flat-square)
 
 [Rclone](https://github.com/jetstack/version-checker) is a command line program to manage files on cloud storage. It is a feature rich alternative to cloud vendors' web storage interfaces. Over 40 cloud storage products support rclone including S3 object stores, business & consumer file storage services, as well as standard transfer protocols.
 
@@ -40,17 +40,12 @@ helm delete my-release
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| cfgRclone."rclone.cfg" | string | `"your rclone config is managed here.   "` |  |
+| cfgRclone."rclone.cfg" | string | `"# your rclone config is managed here.   \n[test-gdrive]\ntype = drive\nclient_id = 123456.apps.googleusercontent.com\nclient_secret = 123456\nscope = drive\ntoken = {}\nteam_drive = 123456"` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"quay.io/simplyzee/kube-rclone"` |  |
 | image.tag | string | `"v1.52.3"` |  |
 | imagePullSecrets | list | `[]` |  |
-| ingress.annotations | object | `{}` |  |
-| ingress.enabled | bool | `false` |  |
-| ingress.hosts[0].host | string | `"chart-example.local"` |  |
-| ingress.hosts[0].paths | list | `[]` |  |
-| ingress.tls | list | `[]` |  |
 | init.image.pullPolicy | string | `"IfNotPresent"` |  |
 | init.image.repository | string | `"busybox"` |  |
 | init.image.tag | string | `"1.33.1"` |  |
