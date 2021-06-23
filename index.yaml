@@ -1,5 +1,24 @@
 apiVersion: v1
 entries:
+  rclone:
+    - apiVersion: v2
+      appVersion: 1.52.3
+      created: "2021-06-23T11:00:58.601928+03:00"
+      description: A Helm chart for backup persistent in gdrive
+      digest: c0bf1d4ba4073f58482552dd6db0bd78b021d1d3bb7ad6b1a621529fbd0eef8f
+      home: https://github.com/ymrsmns/helm-charts/tree/main/charts/rclone
+      icon: https://rclone.org/img/logo_on_dark__horizontal_color.svg
+      maintainers:
+      - email: ymrs@yandex.ru
+        name: ymrsmns
+      name: rclone
+      sources:
+      - https://rclone.org/
+      - https://github.com/rclone/rclone
+      type: application
+      urls:
+      - https://github.com/ymrsmns/helm-charts/releases/download/rclone-0.1.2/rclone-0.1.2.tgz
+      version: 0.1.2  
   nginx-vts-exporter:
   - annotations:
       artifacthub.io/changes: |
