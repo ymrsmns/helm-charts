@@ -24,7 +24,7 @@ entries:
       - https://github.com/rclone/rclone
       type: application
       urls:
-      - https://github.com/ymrsmns/helm-charts/releases/download/rclone-0.1.4.tgz
+      - https://github.com/ymrsmns/helm-charts/releases/download/rclone-0.1.4/rclone-0.1.4.tgz
       version: 0.1.4
     - apiVersion: v2
       appVersion: 1.52.3
