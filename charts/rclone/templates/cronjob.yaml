@@ -1,0 +1,107 @@
+{{- if (eq .Values.kind "CronJob") -}}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "rclone.fullname" . }}
+  labels:
+    {{- include "rclone.labels" . | nindent 4 }}
+spec:
+  schedule: {{ default "*/5 * * * *" .Values.cronjob.schedule | quote }}
+  jobTemplate:    
+    spec:
+      activeDeadlineSeconds: {{ default 300 .Values.cronjob.activeDeadlineSeconds }}
+      template:
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          serviceAccountName: {{ include "rclone.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          initContainers:
+          - command:
+            - sh
+            - /opt/sync.sh
+            image: "{{ .Values.init.image.repository }}:{{ .Values.init.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.init.image.pullPolicy }}
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 14 }}
+            name: create-archive
+            resources: 
+            {{- toYaml .Values.resources | nindent 14 }}
+            volumeMounts:
+            - name: init
+              mountPath: /opt
+            - name: rclone-cm
+              mountPath: /root/rclone/          
+            {{- range $key, $volume := .Values.init.persistence }}
+            {{- if $volume.initPath }}    
+            - name: {{ include "rclone.fullname" $ }}-{{ $key }}
+              mountPath: {{ $volume.initPath }}
+            {{- end }}
+            {{- end }}
+
+          containers:
+          - name: {{ .Chart.Name }}
+            command:
+            - sh
+            - /opt/run.sh
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 14 }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            resources:
+              {{- toYaml .Values.resources | nindent 14 }}
+            volumeMounts:  
+            - name: run
+              mountPath: /opt
+            {{- range $key, $volume := .Values.init.persistence }}
+            {{- if $volume.containerPath }}    
+            - name: {{ include "rclone.fullname" $ }}-{{ $key }}
+              mountPath: {{ $volume.containerPath }}
+            {{- end }}
+            {{- end }}        
+          restartPolicy: Never      
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}  
+          volumes:
+            - name: init
+              configMap:
+                name: {{ include "rclone.fullname" . }}-init
+            - name: run
+              configMap:
+                name: {{ include "rclone.fullname" . }}-run
+            - name: rclone-cm
+              configMap:
+                name: {{ include "rclone.fullname" . }}-rclone         
+        {{- range $key, $volume := .Values.init.persistence }}
+            - name: {{ include "rclone.fullname" $ }}-{{ $key }}   
+            {{- if $volume.hostPath }}
+              hostPath:
+                path: {{ $volume.hostPath }}
+            {{- else if $volume.emptyDir }}
+              emptyDir: {}
+            {{- else if $volume.nfs }}
+              nfs: 
+                server: {{ $volume.server }} 
+                path: {{ $volume.nfsPath }}
+            {{- else if $volume.existingClaimNotCreate }}  
+              persistentVolumeClaim:
+                claimName: {{ if $volume.existingClaim }}{{ $volume.existingClaim }}{{- else }}{{ include "abc.fullname" $ }}-{{ $key }}{{- end }}
+            {{- else }}
+              persistentVolumeClaim:
+                claimName: {{ if $volume.existingClaim }}{{ .Release.Name }}-{{ $volume.existingClaim }}{{- else }}{{ include "abc.fullname" $ }}-{{ $key }}{{- end }}
+            {{- end }}
+        {{- end }}                            
+{{- end }}

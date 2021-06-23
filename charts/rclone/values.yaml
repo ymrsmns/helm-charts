@@ -1,0 +1,133 @@
+# Default values for rclone.
+
+# kind CronJob or Deployment
+kind: CronJob
+
+replicaCount: 1
+
+image:
+  repository: quay.io/simplyzee/kube-rclone
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.52.3"
+
+init:
+  image:
+    repository: busybox
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.33.1"
+  # Create arhive and copy backup files  
+  runScript:
+    sync.sh: |-
+      #!/bin/sh
+      date
+      id
+      ### Init
+      cat /root/rclone/rclone.conf > /etc/rclone/rclone.conf
+      ls -la /etc/rclone/
+      pwd
+      ### Create arch
+      DATA=$(date +"%Y-%m-%d_%H-%M-%S")
+      echo "test">  /source/test.txt
+      tar -czvf /out/arhive-$DATA.tar.gz /source       
+
+  # mount path    
+  persistence: 
+  - name: source
+    emptyDir: true
+    init: true
+    initPath: /source
+  - name: out
+    emptyDir: true
+    init: true
+    initPath: /out
+    containerPath: /out
+  # Hack: rclone write in temp configuration  
+  - name: rc
+    emptyDir: true
+    init: true
+    initPath: /etc/rclone
+    containerPath: /etc/rclone
+
+rclone:
+  runScript:
+    run.sh: |-
+      #!/bin/sh
+      date
+      id
+      cd /out
+      rclone ls test-gdrive: --config /etc/rclone/rclone.conf
+      rclone copy *.tar.gz test-gdrive: --config /etc/rclone/rclone.conf 
+      
+  cfgRclone:
+    rclone.conf: |-
+      # your rclone config is managed here.   
+      [test-gdrive]
+      type = drive
+      client_id = 123456.apps.googleusercontent.com
+      client_secret = 123456
+      scope = drive
+      token = {}
+      team_drive = 123456
+
+cronjob: 
+  schedule: "*/20 * * * *"
+  activeDeadlineSeconds: 300
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  capabilities:
+     drop:
+     - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  #fsGroup: 2000
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
