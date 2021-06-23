@@ -34,7 +34,7 @@ spec:
             - name: init
               mountPath: /opt
             - name: rclone-cm
-              mountPath: /root/rclone/          
+              mountPath: /tmp/rclone/          
             {{- range $key, $volume := .Values.init.persistence }}
             {{- if $volume.initPath }}    
             - name: {{ include "rclone.fullname" $ }}-{{ $key }}
