@@ -11,3 +11,4 @@
 | [Version-checker](charts/version-checker) | Checks images running in the Kubernetes cluster |
 | [Satisfy](charts/satisfy) | Composer repo hosting with Satisfy |
 | [Nginx-vts-exporter](charts/nginx-vts-exporter) | Scrapes Nginx vts stats and exports them via HTTP for Prometheus consumption|
+[rclone](charts/rclone) | A Helm chart for backup persistent in gdrive  |

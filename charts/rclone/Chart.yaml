@@ -1,8 +1,15 @@
 apiVersion: v2
+annotations:
+  artifacthub.io/license: MIT License
+  artifacthub.io/changes: |
+    - Change docs
+  artifacthub.io/links: |
+    - name: Documentation
+      url: https://github.com/rclone/rclone/blob/master/docs/content/docs.md
 name: rclone
 description: A Helm chart for backup persistent in gdrive
 type: application
-version: 0.1.2
+version: 0.1.3
 appVersion: 1.52.3
 maintainers:
 - email: ymrs@yandex.ru
