@@ -2,7 +2,7 @@ apiVersion: v2
 name: rclone
 description: A Helm chart for backup persistent in gdrive
 type: application
-version: 0.1.1
+version: 0.1.2
 appVersion: 1.52.3
 maintainers:
 - email: ymrs@yandex.ru

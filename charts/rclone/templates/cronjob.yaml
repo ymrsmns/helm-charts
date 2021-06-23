@@ -25,6 +25,8 @@ spec:
             - /opt/sync.sh
             image: "{{ .Values.init.image.repository }}:{{ .Values.init.image.tag | default .Chart.AppVersion }}"
             imagePullPolicy: {{ .Values.init.image.pullPolicy }}
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 14 }}
             name: create-archive
             resources: 
             {{- toYaml .Values.resources | nindent 14 }}
