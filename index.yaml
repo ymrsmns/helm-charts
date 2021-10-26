@@ -2,8 +2,6 @@ apiVersion: v1
 entries:
   rclone:
     - annotations:
-      artifacthub.io/changes: |
-        - Change docs and CJ
       artifacthub.io/license: MIT License
       artifacthub.io/links: |
         - name: Documentation
