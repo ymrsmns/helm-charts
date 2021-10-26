@@ -44,8 +44,6 @@ entries:
       version: 0.1.2  
   nginx-vts-exporter:
   - annotations:
-      artifacthub.io/changes: |
-        - Fix selector.matchLabels
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |
         - name: Documentation
@@ -73,8 +71,6 @@ entries:
     - https://github.com/ymrsmns/helm-charts/releases/download/nginx-vts-exporter-0.1.2/nginx-vts-exporter-0.1.2.tgz
     version: 0.1.2    
   - annotations:
-      artifacthub.io/changes: |
-        - Addons serviceMonitor, review description
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |
         - name: Documentation
